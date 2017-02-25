@@ -1,0 +1,70 @@
+<html>
+	<head>
+	    <meta charset="utf-8"/>
+		<title>My first Three.js app</title>
+		<style>
+			body { margin: 0; }
+			canvas { width: 100%; height: 100% }
+		</style>
+	</head>
+	<body>
+		<script src="js/TextureShaders.js"></script>
+		<script src="lib/three.js"></script>
+		<script src="js/particle.js"></script>
+		<script src="js/trees.js"></script>
+		<script src="js/helper.js"></script>
+		<script src="js/word.js"></script>
+		<script src="js/branch.js"></script>
+		<script src="js/tree.js"></script>
+		<script src="lib/OrbitControls.js"></script>
+
+  		<script>
+  		
+            var scene = new THREE.Scene();
+            var scene = new THREE.Scene();
+			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 2000 );
+
+			var renderer = new THREE.WebGLRenderer({ antialias: true });
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+			var control = new THREE.OrbitControls( camera, renderer.domElement );
+			
+			var renderer2 = new THREE.WebGLRenderer({ antialias: true });
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer2.domElement );
+
+            camera.position.z = 2000;
+            camera.position.y = camera.position.z/2;
+
+            var part = new Particle();
+			part.create(500);
+			part.particles.scale.multiplyScalar(1);
+			
+
+			scene.add(part.particles);
+
+			tree = DrawTree();
+	        scene.add(tree);
+            // var clock = new THREE.Clock();
+            // clock.start();
+            // var start = clock.getElapsedTime();
+            var t = 0;
+		var render = function () {
+				requestAnimationFrame( render );
+				 // var c = clock.getElapsedTime();
+				
+				renderer.render(scene, camera);
+				
+			    t = t+1;
+			    part.move(t);
+			};
+
+		
+
+			render();
+			
+  
+
+		</script>
+	</body>
+</html>
